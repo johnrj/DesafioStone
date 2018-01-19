@@ -108,6 +108,7 @@
     <Compile Include="Controllers\ImobilizadoController.cs" />
     <Compile Include="Controllers\TipoImobilizadoController.cs" />
     <Compile Include="Excecoes\ObjetoDuplicadoException.cs" />
+    <Compile Include="Excecoes\ObjetoNaoEncontradoException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -117,6 +118,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\ImobilizadoRepository.cs" />
+    <Compile Include="Repository\ITipoImobilizadoRepository.cs" />
     <Compile Include="Repository\TipoImobilizadoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
