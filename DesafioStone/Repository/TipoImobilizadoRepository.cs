@@ -70,12 +70,10 @@ namespace DesafioStone.Repository
             }
 
             IImobilizadoRepository imobilizadoRepo = new ImobilizadoRepository();
-            var imobilizados = imobilizadoRepo.ObterTodos().Where(w=>w.TipoImobilizadoId == obj._id.ToString()).ToList();
-            if (imobilizados.Any())
+            if (imobilizadoRepo.ObterTodos().Where(w => w.TipoImobilizadoId == id).Any())
             {
                 throw new Excecoes.AcaoProibidaException();
             }
-            //TODO: Não permitir apagar um TipoImobilizado que esteja sendo usado por algum Imobilizado
 
             colecao.DeleteOne(d => d._id == obj._id);
             return obj;
