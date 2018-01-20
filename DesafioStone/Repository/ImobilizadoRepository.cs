@@ -25,34 +25,41 @@ namespace DesafioStone.Repository
         public Imobilizado Obter(ObjectId id)
         {
             var retorno = colecao.Find(f => f._id == id).FirstOrDefault();
-            if(retorno == null)
-            {
-                throw new Excecoes.ObjetoNaoEncontradoException();
-            }
-
             return retorno;
         }
 
         public Imobilizado Inserir(Imobilizado obj)
         {
-            var tipoImobilizado = new TipoImobilizadoRepository().Obter(ObjectId.Parse(obj.TipoImobilizadoId));
-            obj.TipoImobilizado = tipoImobilizado;
+            ITipoImobilizadoRepository tipoImobilizadoRepo = new TipoImobilizadoRepository();
+            var tipoImobilizado = tipoImobilizadoRepo.Obter(obj.TipoImobilizadoId);
+            if(tipoImobilizado == null)
+            {
+                throw new Excecoes.ObjetoNaoEncontradoException(string.Format("O TipoImobilizado {0} não existe.", obj.TipoImobilizadoId));
+            }
             colecao.InsertOne(obj);
             return obj;
         }
 
         public Imobilizado Atualizar(Imobilizado obj)
         {
-            //O tratamento de existencia do item passado está no metodo Obter
             var objExistente = Obter(obj._id);
+            if(objExistente == null)
+            {
+                throw new Excecoes.ObjetoNaoEncontradoException();
+            }
+
             colecao.ReplaceOne(u => u._id == obj._id, obj);
             return obj;
         }
 
         public Imobilizado Apagar(ObjectId id)
         {
-            //O tratamento de existencia do item passado está no metodo Obter
             var obj = Obter(id);
+            if (obj == null)
+            {
+                throw new Excecoes.ObjetoNaoEncontradoException();
+            }
+
             colecao.DeleteOne(d => d._id == id);
             return obj;
         }

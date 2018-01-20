@@ -39,11 +39,11 @@ namespace DesafioStone.Controllers
             try
             {
                 var retorno = repo.Obter(id);
+                if(retorno == null)
+                {
+                    return NotFound();
+                }
                 return Ok(retorno);
-            }
-            catch (Excecoes.ObjetoNaoEncontradoException)
-            {
-                return NotFound();
             }
             catch(Exception ex)
             {
@@ -84,7 +84,6 @@ namespace DesafioStone.Controllers
 
             try
             {
-                obj._id = new ObjectId(id);
                 var retorno = repo.Atualizar(obj);
                 return Ok(retorno);
             }
@@ -103,7 +102,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = repo.Apagar(new ObjectId(id));
+                var retorno = repo.Apagar(id);
                 return Ok(retorno);
             }
             catch (Excecoes.ObjetoNaoEncontradoException)

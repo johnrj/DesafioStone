@@ -26,46 +26,43 @@ namespace DesafioStone.Repository
         public TipoImobilizado Obter(string nome)
         {
             var retorno = colecao.Find(f => f.Nome == nome).FirstOrDefault();
-            if(retorno == null)
-            {
-                throw new Excecoes.ObjetoNaoEncontradoException();
-            }
-
-            return retorno;
-        }
-
-        public TipoImobilizado Obter(ObjectId id)
-        {
-            var retorno = colecao.Find(f => f._id == id).FirstOrDefault();
-            if (retorno == null)
-            {
-                throw new Excecoes.ObjetoNaoEncontradoException();
-            }
-
             return retorno;
         }
 
         public TipoImobilizado Inserir(TipoImobilizado obj)
         {
-            //O tratamento de existencia do item passado está no metodo Obter
             var objExistente = Obter(obj.Nome);
+            if(objExistente != null)
+            {
+                throw new Excecoes.ObjetoDuplicadoException();
+            }
             colecao.InsertOne(obj);
             return obj;
         }
 
         public TipoImobilizado Atualizar(TipoImobilizado obj)
         {
-            //O tratamento de existencia do item passado está no metodo Obter
-            var objExistente = Obter(obj._id);
-            colecao.ReplaceOne(u => u._id == obj._id, obj);
+            var objExistente = Obter(obj.Nome);
+            if (objExistente == null)
+            {
+                throw new Excecoes.ObjetoNaoEncontradoException();
+            }
+            //TODO: Atualizar os Imobilizados desse TipoImobilizado para o novo valor
+
+            colecao.ReplaceOne(u => u.Nome == obj.Nome, obj);
             return obj;
         }
 
-        public TipoImobilizado Apagar(ObjectId id)
+        public TipoImobilizado Apagar(string nome)
         {
-            //O tratamento de existencia do item passado está no metodo Obter
-            var obj = Obter(id);
-            colecao.DeleteOne(d => d._id == id);
+            var obj = Obter(nome);
+            if (obj == null)
+            {
+                throw new Excecoes.ObjetoNaoEncontradoException();
+            }
+            //TODO: Não permitir apagar um TipoImobilizado que esteja sendo usado por algum Imobilizado
+
+            colecao.DeleteOne(d => d.Nome == nome);
             return obj;
         }
     }

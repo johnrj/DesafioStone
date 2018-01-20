@@ -7,11 +7,11 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DesafioStone.Models
 {
-    public class TipoImobilizado : DocumentoBase
+    public class TipoImobilizado
     {
-        [BsonElement("Nome")]
+        [BsonId]
         public string Nome { get; set; }
-        [BsonElement("Imobilizados")]
+        [BsonIgnore]
         public List<Imobilizado> Imobilizados { get; set; }
     }
 }
