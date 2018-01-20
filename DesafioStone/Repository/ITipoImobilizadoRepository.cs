@@ -7,10 +7,10 @@ namespace DesafioStone.Repository
 {
     public interface ITipoImobilizadoRepository
     {
-        TipoImobilizado InserirTipoImobilizado(TipoImobilizado obj);
+        TipoImobilizado Inserir(TipoImobilizado obj);
         TipoImobilizado Obter(string nome);
         List<TipoImobilizado> ObterTodos();
-        void Atualizar(TipoImobilizado obj);
+        TipoImobilizado Atualizar(TipoImobilizado obj);
         TipoImobilizado Obter(ObjectId id);
         TipoImobilizado Apagar(ObjectId id);
     }

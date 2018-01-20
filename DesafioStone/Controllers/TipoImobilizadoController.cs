@@ -19,22 +19,36 @@ namespace DesafioStone.Controllers
             repo = new TipoImobilizadoRepository();
         }
 
-        public List<TipoImobilizado> GetTipoImobilizado()
+        [ResponseType(typeof(List<TipoImobilizado>))]
+        public IHttpActionResult GetTipoImobilizado()
         {
-            var retorno = repo.ObterTodos();
-
-            return retorno;
+            try
+            {
+                var retorno = repo.ObterTodos();
+                return Ok(retorno);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         [ResponseType(typeof(TipoImobilizado))]
         public IHttpActionResult GetTipoImobilizado(string id)
         {
-            var retorno = repo.Obter(id);
-            if(retorno == null)
+            try
+            {
+                var retorno = repo.Obter(id);
+                return Ok(retorno);
+            }
+            catch (Excecoes.ObjetoNaoEncontradoException)
             {
                 return NotFound();
             }
-            return Ok(retorno);
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         [ResponseType(typeof(TipoImobilizado))]
@@ -47,20 +61,20 @@ namespace DesafioStone.Controllers
             
             try
             {
-                var retorno = repo.InserirTipoImobilizado(obj);
+                var retorno = repo.Inserir(obj);
                 return Created("DefaultApi", retorno);
             }
             catch (Excecoes.ObjetoDuplicadoException)
             {
                 return Conflict();
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                return InternalServerError(ex);
             }
         }
 
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(TipoImobilizado))]
         public IHttpActionResult PutTipoImobilizado([FromUri] string id, [FromBody] TipoImobilizado obj)
         {
             if (!ModelState.IsValid)
@@ -71,16 +85,16 @@ namespace DesafioStone.Controllers
             try
             {
                 obj._id = new ObjectId(id);
-                repo.Atualizar(obj);
-                return StatusCode(HttpStatusCode.NoContent);
+                var retorno = repo.Atualizar(obj);
+                return Ok(retorno);
             }
             catch (Excecoes.ObjetoNaoEncontradoException)
             {
                 return NotFound();
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                return InternalServerError(ex);
             }
         }
 
@@ -96,9 +110,9 @@ namespace DesafioStone.Controllers
             {
                 return NotFound();
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                return InternalServerError(ex);
             }
         }
     }

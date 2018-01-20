@@ -11,5 +11,7 @@ namespace DesafioStone.Models
     {
         [BsonElement("Nome")]
         public string Nome { get; set; }
+        [BsonElement("Imobilizados")]
+        public List<Imobilizado> Imobilizados { get; set; }
     }
 }

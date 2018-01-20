@@ -23,56 +23,50 @@ namespace DesafioStone.Repository
             return retorno;
         }
 
-        public TipoImobilizado InserirTipoImobilizado(TipoImobilizado obj)
-        {
-            if (Obter(obj.Nome) == null)
-            {
-                colecao.InsertOne(obj);
-                return obj;
-            }
-            else
-            {
-                throw new Excecoes.ObjetoDuplicadoException();
-            }
-        }
-
         public TipoImobilizado Obter(string nome)
         {
             var retorno = colecao.Find(f => f.Nome == nome).FirstOrDefault();
+            if(retorno == null)
+            {
+                throw new Excecoes.ObjetoNaoEncontradoException();
+            }
+
             return retorno;
         }
 
         public TipoImobilizado Obter(ObjectId id)
         {
             var retorno = colecao.Find(f => f._id == id).FirstOrDefault();
-            return retorno;
-        }
-
-        public void Atualizar(TipoImobilizado obj)
-        {
-            if (Obter(obj._id) != null)
-            {
-                colecao.ReplaceOne(u => u._id == obj._id, obj);
-            }
-            else
+            if (retorno == null)
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
 
+            return retorno;
+        }
+
+        public TipoImobilizado Inserir(TipoImobilizado obj)
+        {
+            //O tratamento de existencia do item passado está no metodo Obter
+            var objExistente = Obter(obj.Nome);
+            colecao.InsertOne(obj);
+            return obj;
+        }
+
+        public TipoImobilizado Atualizar(TipoImobilizado obj)
+        {
+            //O tratamento de existencia do item passado está no metodo Obter
+            var objExistente = Obter(obj._id);
+            colecao.ReplaceOne(u => u._id == obj._id, obj);
+            return obj;
         }
 
         public TipoImobilizado Apagar(ObjectId id)
         {
+            //O tratamento de existencia do item passado está no metodo Obter
             var obj = Obter(id);
-            if(obj != null)
-            {
-                colecao.DeleteOne(d => d._id == id);
-                return obj;
-            }
-            else
-            {
-                throw new Excecoes.ObjetoNaoEncontradoException();
-            }
+            colecao.DeleteOne(d => d._id == id);
+            return obj;
         }
     }
 }
