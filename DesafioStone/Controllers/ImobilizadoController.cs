@@ -11,7 +11,7 @@ namespace DesafioStone.Controllers
 {
     public class ImobilizadoController : ApiController
     {
-        public List<Imobilizado> GetImobilizados()
+        public List<Imobilizado> GetImobilizado()
         {
             var repo = new ImobilizadoRepository();
             var imobilizados = repo.ObterTodos();

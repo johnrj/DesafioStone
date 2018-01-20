@@ -19,11 +19,22 @@ namespace DesafioStone.Controllers
             repo = new TipoImobilizadoRepository();
         }
 
-        public List<TipoImobilizado> GetTipoImobilizados()
+        public List<TipoImobilizado> GetTipoImobilizado()
         {
             var retorno = repo.ObterTodos();
 
             return retorno;
+        }
+
+        [ResponseType(typeof(TipoImobilizado))]
+        public IHttpActionResult GetTipoImobilizado(string id)
+        {
+            var retorno = repo.Obter(id);
+            if(retorno == null)
+            {
+                return NotFound();
+            }
+            return Ok(retorno);
         }
 
         [ResponseType(typeof(TipoImobilizado))]
