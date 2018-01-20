@@ -7,9 +7,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DesafioStone.Models
 {
-    public class TipoImobilizado
+    public class TipoImobilizado : DocumentoBase
     {
-        [BsonId]
         public string Nome { get; set; }
         [BsonIgnore]
         public List<Imobilizado> Imobilizados { get; set; }

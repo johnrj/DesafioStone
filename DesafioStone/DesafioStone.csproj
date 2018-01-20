@@ -107,6 +107,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ImobilizadoController.cs" />
     <Compile Include="Controllers\TipoImobilizadoController.cs" />
+    <Compile Include="Excecoes\AcaoProibidaException.cs" />
     <Compile Include="Excecoes\ObjetoDuplicadoException.cs" />
     <Compile Include="Excecoes\ObjetoNaoEncontradoException.cs" />
     <Compile Include="Global.asax.cs">

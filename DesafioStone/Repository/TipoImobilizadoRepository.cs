@@ -29,6 +29,12 @@ namespace DesafioStone.Repository
             return retorno;
         }
 
+        private TipoImobilizado Obter(ObjectId id)
+        {
+            var retorno = colecao.Find(f => f._id == id).FirstOrDefault();
+            return retorno;
+        }
+
         public TipoImobilizado Inserir(TipoImobilizado obj)
         {
             var objExistente = Obter(obj.Nome);
@@ -40,29 +46,38 @@ namespace DesafioStone.Repository
             return obj;
         }
 
-        public TipoImobilizado Atualizar(TipoImobilizado obj)
+        public TipoImobilizado Atualizar(string id, TipoImobilizado novoObj)
         {
-            var objExistente = Obter(obj.Nome);
+            var objId = ObjectId.Parse(id);
+            novoObj._id = objId;
+
+            var objExistente = Obter(objId);
             if (objExistente == null)
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
-            //TODO: Atualizar os Imobilizados desse TipoImobilizado para o novo valor
 
-            colecao.ReplaceOne(u => u.Nome == obj.Nome, obj);
-            return obj;
+            colecao.ReplaceOne(u => u._id == objExistente._id, novoObj);
+            return novoObj;
         }
 
-        public TipoImobilizado Apagar(string nome)
+        public TipoImobilizado Apagar(string id)
         {
-            var obj = Obter(nome);
+            var obj = Obter(ObjectId.Parse(id));
             if (obj == null)
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
+
+            IImobilizadoRepository imobilizadoRepo = new ImobilizadoRepository();
+            var imobilizados = imobilizadoRepo.ObterTodos().Where(w=>w.TipoImobilizadoId == obj._id.ToString()).ToList();
+            if (imobilizados.Any())
+            {
+                throw new Excecoes.AcaoProibidaException();
+            }
             //TODO: Não permitir apagar um TipoImobilizado que esteja sendo usado por algum Imobilizado
 
-            colecao.DeleteOne(d => d.Nome == nome);
+            colecao.DeleteOne(d => d._id == obj._id);
             return obj;
         }
     }

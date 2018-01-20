@@ -10,7 +10,7 @@ namespace DesafioStone.Repository
         List<TipoImobilizado> ObterTodos();
         TipoImobilizado Obter(string nome);
         TipoImobilizado Inserir(TipoImobilizado obj);
-        TipoImobilizado Atualizar(TipoImobilizado obj);
-        TipoImobilizado Apagar(string nome);
+        TipoImobilizado Atualizar(string id, TipoImobilizado obj);
+        TipoImobilizado Apagar(string id);
     }
 }

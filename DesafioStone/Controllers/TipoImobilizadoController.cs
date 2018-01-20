@@ -84,7 +84,7 @@ namespace DesafioStone.Controllers
 
             try
             {
-                var retorno = repo.Atualizar(obj);
+                var retorno = repo.Atualizar(id, obj);
                 return Ok(retorno);
             }
             catch (Excecoes.ObjetoNaoEncontradoException)
@@ -108,6 +108,10 @@ namespace DesafioStone.Controllers
             catch (Excecoes.ObjetoNaoEncontradoException)
             {
                 return NotFound();
+            }
+            catch (Excecoes.AcaoProibidaException)
+            {
+                return StatusCode(HttpStatusCode.Forbidden);
             }
             catch (Exception ex)
             {
