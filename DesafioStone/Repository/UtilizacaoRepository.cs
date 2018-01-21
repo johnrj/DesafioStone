@@ -37,6 +37,19 @@ namespace DesafioStone.Repository
             return retorno;
         }
 
+        public List<Utilizacao> Obter(DateTime data)
+        {
+            var horaInicial = new DateTime(data.Year, data.Month, data.Day);
+            var horaFinal = horaInicial.AddDays(1).AddSeconds(-1);
+            var retorno = new List<Utilizacao>();
+
+            for (var dt = horaInicial; dt < horaFinal; dt = dt.AddHours(1))
+            {
+                retorno.AddRange(colecao.Find(f => dt >= f.InicioUso && dt <= f.FimUso).ToList());
+            }
+            return retorno;
+        }
+
         public Utilizacao Inserir(Utilizacao obj)
         {
             IImobilizadoRepository imobilizadoRepo = new ImobilizadoRepository();
@@ -82,6 +95,19 @@ namespace DesafioStone.Repository
 
             colecao.DeleteOne(d => d._id == id);
             return obj;
+        }
+
+        public List<Utilizacao> Obter(string id, DateTime data)
+        {
+            var horaInicial = new DateTime(data.Year, data.Month, data.Day);
+            var horaFinal = horaInicial.AddDays(1).AddSeconds(-1);
+            var retorno = new List<Utilizacao>();
+
+            for (var dt = horaInicial; dt < horaFinal; dt = dt.AddHours(1))
+            {
+                retorno.AddRange(colecao.Find(f => f.ItemUtilizadoId == id && dt >= f.InicioUso && dt <= f.FimUso).ToList());
+            }
+            return retorno;
         }
     }
 }

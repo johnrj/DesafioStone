@@ -1,4 +1,5 @@
 ﻿using DesafioStone.Models;
+using DesafioStone.Negocio;
 using DesafioStone.Repository;
 using System;
 using System.Collections.Generic;
@@ -6,34 +7,67 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace DesafioStone.Controllers
 {
     public class DisponibilidadeController : ApiController
     {
-        IDisponibilidadeRepository repo;
+        IDisponibilidadeNegocio negocio;
 
         public DisponibilidadeController()
         {
-            repo = new DisponibilidadeRepository();
+            negocio = new DisponibilidadeNegocio();
         }
 
-        public List<Disponibilidade> GetDisponibilidade()
+        [ResponseType(typeof(List<Disponibilidade>))]
+        public IHttpActionResult GetDisponibilidade()
         {
-            var retorno = repo.ObterDisponibilidade();
-            return retorno;
+            try
+            {
+                var retorno = negocio.ObterTodasDisponibilidadesDoDia();
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
-        public List<Disponibilidade> GetDisponibilidade(DateTime d)
+        [ResponseType(typeof(List<Disponibilidade>))]
+        public IHttpActionResult GetDisponibilidade(DateTime d)
         {
-            var retorno = repo.ObterDisponibilidade(data: d);
-            return retorno;
+            try
+            {
+                var retorno = negocio.ObterTodasDisponibilidadesDoDia(d);
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
-        public List<Disponibilidade> GetDisponibilidade(string id, DateTime d)
+        [ResponseType(typeof(List<Disponibilidade>))]
+        public IHttpActionResult GetDisponibilidade(string id, DateTime d)
         {
-            var retorno = repo.ObterDisponibilidade(id, d);
-            return retorno;
+            try
+            {
+                var retorno = negocio.ObterTodasDisponibilidadesDoDia(id, d);
+                return Ok(retorno);
+            }
+            catch (Excecoes.AcaoProibidaException)
+            {
+                return StatusCode(HttpStatusCode.Forbidden);
+            }
+            catch (Excecoes.ObjetoNaoEncontradoException)
+            {
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }

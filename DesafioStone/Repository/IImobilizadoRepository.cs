@@ -10,6 +10,7 @@ namespace DesafioStone.Repository
         Imobilizado Atualizar(Imobilizado obj);
         Imobilizado Inserir(Imobilizado obj);
         Imobilizado Obter(ObjectId id);
+        List<Imobilizado> Obter(bool ativo);
         List<Imobilizado> ObterTodos();
     }
 }

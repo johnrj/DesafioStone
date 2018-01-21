@@ -28,6 +28,12 @@ namespace DesafioStone.Repository
             return retorno;
         }
 
+        public List<Imobilizado> Obter(bool ativo)
+        {
+            var retorno = colecao.Find(f => f.Ativo == ativo).ToList();
+            return retorno;
+        }
+
         public Imobilizado Inserir(Imobilizado obj)
         {
             ITipoImobilizadoRepository tipoImobilizadoRepo = new TipoImobilizadoRepository();
