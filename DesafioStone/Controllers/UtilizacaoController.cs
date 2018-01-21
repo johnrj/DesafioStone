@@ -1,5 +1,6 @@
 ﻿using DesafioStone.Models;
 using DesafioStone.Repository;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,48 @@ namespace DesafioStone.Controllers
                 return Created("DefaultAPI", retorno);
             }
             catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [ResponseType(typeof(Utilizacao))]
+        public IHttpActionResult PutUtilizacao([FromUri] string id, [FromBody] Utilizacao obj)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                obj._id = ObjectId.Parse(id);
+                var retorno = repo.Atualizar(obj);
+                return Ok(retorno);
+            }
+            catch (Excecoes.ObjetoNaoEncontradoException)
+            {
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [ResponseType(typeof(Utilizacao))]
+        public IHttpActionResult DeleteUtilizacao(string id)
+        {
+            try
+            {
+                var retorno = repo.Apagar(ObjectId.Parse(id));
+                return Ok(retorno);
+            }
+            catch (Excecoes.ObjetoNaoEncontradoException)
+            {
+                return NotFound();
+            }
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
