@@ -1,22 +1,18 @@
 ﻿using DesafioStone.Models;
-using DesafioStone.Repository;
+using DesafioStone.Negocio;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using MongoDB.Bson;
 
 namespace DesafioStone.Controllers
 {
     public class ImobilizadoController : ApiController
     {
-        private IImobilizadoRepository repo;
+        private IImobilizadoNegocio nego;
         public ImobilizadoController()
         {
-            repo = new ImobilizadoRepository();
+            nego = new ImobilizadoNegocio();
         }
 
         [ResponseType(typeof(List<Imobilizado>))]
@@ -24,7 +20,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var imobilizados = repo.ObterTodos();
+                var imobilizados = nego.ObterTodos();
                 return Ok(imobilizados);
             }
             catch(Exception ex)
@@ -38,12 +34,8 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = repo.Obter(new ObjectId(id));
+                var retorno = nego.Obter(id);
                 return Ok(retorno);
-            }
-            catch (Excecoes.ObjetoNaoEncontradoException)
-            {
-                return NotFound();
             }
             catch (Exception ex)
             {
@@ -61,8 +53,12 @@ namespace DesafioStone.Controllers
 
             try
             {
-                var retorno = repo.Inserir(obj);
+                var retorno = nego.Inserir(obj);
                 return Created("DefaultApi", retorno);
+            }
+            catch (Excecoes.ObjetoNaoEncontradoException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {
@@ -80,8 +76,7 @@ namespace DesafioStone.Controllers
 
             try
             {
-                obj._id = ObjectId.Parse(id);
-                var retorno = repo.Atualizar(obj);
+                var retorno = nego.Atualizar(id, obj);
                 return Ok(retorno);
             }
             catch (Excecoes.ObjetoNaoEncontradoException)
@@ -99,7 +94,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = repo.Apagar(ObjectId.Parse(id));
+                var retorno = nego.Apagar(id);
                 return Ok(retorno);
             }
             catch (Excecoes.ObjetoNaoEncontradoException)
@@ -111,6 +106,5 @@ namespace DesafioStone.Controllers
                 return InternalServerError(ex);
             }
         }
-
     }
 }

@@ -122,6 +122,12 @@
     <Compile Include="Models\Utilizacao.cs" />
     <Compile Include="Negocio\DisponibilidadeNegocio.cs" />
     <Compile Include="Negocio\IDisponibilidadeNegocio.cs" />
+    <Compile Include="Negocio\IImobilizadoNegocio.cs" />
+    <Compile Include="Negocio\ImobilizadoNegocio.cs" />
+    <Compile Include="Negocio\ITipoImobilizadoNegocio.cs" />
+    <Compile Include="Negocio\IUtilizacaoNegocio.cs" />
+    <Compile Include="Negocio\TipoImobilizadoNegocio.cs" />
+    <Compile Include="Negocio\UtilizacaoNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\IImobilizadoRepository.cs" />

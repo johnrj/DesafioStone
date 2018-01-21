@@ -1,10 +1,8 @@
 ﻿using DesafioStone.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DesafioStone.Repository
 {
@@ -34,40 +32,34 @@ namespace DesafioStone.Repository
             return retorno;
         }
 
+        public List<Imobilizado> ObterPeloTipo(string id)
+        {
+            var retorno = colecao.Find(f => f.TipoImobilizadoId == id).ToList();
+            return retorno;
+        }
+
+        public List<Imobilizado> Obter(List<ObjectId> ids)
+        {
+            var filter = Builders<Imobilizado>.Filter.In(i => i._id, ids);
+            var retorno = colecao.Find(filter).ToList();
+            return retorno;
+        }
+
         public Imobilizado Inserir(Imobilizado obj)
         {
-            ITipoImobilizadoRepository tipoImobilizadoRepo = new TipoImobilizadoRepository();
-            var tipoImobilizado = tipoImobilizadoRepo.Obter(obj.TipoImobilizadoId);
-            if(tipoImobilizado == null)
-            {
-                throw new Excecoes.ObjetoNaoEncontradoException(string.Format("O TipoImobilizado {0} não existe.", obj.TipoImobilizadoId));
-            }
             colecao.InsertOne(obj);
             return obj;
         }
 
         public Imobilizado Atualizar(Imobilizado obj)
         {
-            var objExistente = Obter(obj._id);
-            if(objExistente == null)
-            {
-                throw new Excecoes.ObjetoNaoEncontradoException();
-            }
-
             colecao.ReplaceOne(u => u._id == obj._id, obj);
             return obj;
         }
 
-        public Imobilizado Apagar(ObjectId id)
+        public void Apagar(ObjectId id)
         {
-            var obj = Obter(id);
-            if (obj == null)
-            {
-                throw new Excecoes.ObjetoNaoEncontradoException();
-            }
-
             colecao.DeleteOne(d => d._id == id);
-            return obj;
         }
     }
 }

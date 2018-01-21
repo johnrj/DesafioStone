@@ -1,22 +1,19 @@
 ﻿using DesafioStone.Models;
-using DesafioStone.Repository;
+using DesafioStone.Negocio;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using MongoDB.Bson;
 
 namespace DesafioStone.Controllers
 {
     public class TipoImobilizadoController : ApiController
     {
-        private ITipoImobilizadoRepository repo;
+        private ITipoImobilizadoNegocio negocio;
         public TipoImobilizadoController()
         {
-            repo = new TipoImobilizadoRepository();
+            negocio = new TipoImobilizadoNegocio();
         }
 
         [ResponseType(typeof(List<TipoImobilizado>))]
@@ -24,7 +21,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = repo.ObterTodos();
+                var retorno = negocio.ObterTodos();
                 return Ok(retorno);
             }
             catch(Exception ex)
@@ -38,11 +35,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = repo.Obter(id);
-                if(retorno == null)
-                {
-                    return NotFound();
-                }
+                var retorno = negocio.Obter(id);
                 return Ok(retorno);
             }
             catch(Exception ex)
@@ -61,7 +54,7 @@ namespace DesafioStone.Controllers
             
             try
             {
-                var retorno = repo.Inserir(obj);
+                var retorno = negocio.Inserir(obj);
                 return Created("DefaultApi", retorno);
             }
             catch (Excecoes.ObjetoDuplicadoException)
@@ -84,7 +77,7 @@ namespace DesafioStone.Controllers
 
             try
             {
-                var retorno = repo.Atualizar(id, obj);
+                var retorno = negocio.Atualizar(id, obj);
                 return Ok(retorno);
             }
             catch (Excecoes.ObjetoNaoEncontradoException)
@@ -102,7 +95,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = repo.Apagar(id);
+                var retorno = negocio.Apagar(id);
                 return Ok(retorno);
             }
             catch (Excecoes.ObjetoNaoEncontradoException)

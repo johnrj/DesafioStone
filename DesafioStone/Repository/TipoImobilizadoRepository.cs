@@ -1,10 +1,8 @@
 ﻿using DesafioStone.Models;
-using System;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using MongoDB.Driver;
-using MongoDB.Bson;
 
 namespace DesafioStone.Repository
 {
@@ -23,60 +21,33 @@ namespace DesafioStone.Repository
             return retorno;
         }
 
+        public TipoImobilizado Obter(ObjectId id)
+        {
+            var retorno = colecao.Find(f => f._id == id).FirstOrDefault();
+            return retorno;
+        }
+
         public TipoImobilizado Obter(string nome)
         {
             var retorno = colecao.Find(f => f.Nome == nome).FirstOrDefault();
             return retorno;
         }
 
-        private TipoImobilizado Obter(ObjectId id)
-        {
-            var retorno = colecao.Find(f => f._id == id).FirstOrDefault();
-            return retorno;
-        }
-
         public TipoImobilizado Inserir(TipoImobilizado obj)
         {
-            var objExistente = Obter(obj.Nome);
-            if(objExistente != null)
-            {
-                throw new Excecoes.ObjetoDuplicadoException();
-            }
             colecao.InsertOne(obj);
             return obj;
         }
 
-        public TipoImobilizado Atualizar(string id, TipoImobilizado novoObj)
+        public TipoImobilizado Atualizar(TipoImobilizado obj)
         {
-            var objId = ObjectId.Parse(id);
-            novoObj._id = objId;
-
-            var objExistente = Obter(objId);
-            if (objExistente == null)
-            {
-                throw new Excecoes.ObjetoNaoEncontradoException();
-            }
-
-            colecao.ReplaceOne(u => u._id == objExistente._id, novoObj);
-            return novoObj;
+            colecao.ReplaceOne(u => u._id == obj._id, obj);
+            return obj;
         }
 
-        public TipoImobilizado Apagar(string id)
+        public void Apagar(ObjectId id)
         {
-            var obj = Obter(ObjectId.Parse(id));
-            if (obj == null)
-            {
-                throw new Excecoes.ObjetoNaoEncontradoException();
-            }
-
-            IImobilizadoRepository imobilizadoRepo = new ImobilizadoRepository();
-            if (imobilizadoRepo.ObterTodos().Where(w => w.TipoImobilizadoId == id).Any())
-            {
-                throw new Excecoes.AcaoProibidaException();
-            }
-
-            colecao.DeleteOne(d => d._id == obj._id);
-            return obj;
+            colecao.DeleteOne(d => d._id == id);
         }
     }
 }
