@@ -107,6 +107,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ImobilizadoController.cs" />
     <Compile Include="Controllers\TipoImobilizadoController.cs" />
+    <Compile Include="Controllers\UtilizacaoController.cs" />
     <Compile Include="Excecoes\AcaoProibidaException.cs" />
     <Compile Include="Excecoes\ObjetoDuplicadoException.cs" />
     <Compile Include="Excecoes\ObjetoNaoEncontradoException.cs" />
@@ -122,7 +123,9 @@
     <Compile Include="Repository\IImobilizadoRepository.cs" />
     <Compile Include="Repository\ImobilizadoRepository.cs" />
     <Compile Include="Repository\ITipoImobilizadoRepository.cs" />
+    <Compile Include="Repository\IUtilizacaoRepository.cs" />
     <Compile Include="Repository\TipoImobilizadoRepository.cs" />
+    <Compile Include="Repository\UtilizacaoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

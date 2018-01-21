@@ -64,10 +64,6 @@ namespace DesafioStone.Controllers
                 var retorno = repo.Inserir(obj);
                 return Created("DefaultApi", retorno);
             }
-            catch (Excecoes.ObjetoDuplicadoException)
-            {
-                return Conflict();
-            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
