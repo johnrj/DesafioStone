@@ -1,14 +1,9 @@
-﻿using Xunit;
-using DesafioStone.Negocio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
+﻿using DesafioStone.Models;
 using DesafioStone.Repository;
-using DesafioStone.Models;
 using MongoDB.Bson;
+using Moq;
+using System;
+using Xunit;
 
 namespace DesafioStone.Negocio.Tests
 {
@@ -28,9 +23,15 @@ namespace DesafioStone.Negocio.Tests
         }
 
         [Fact()]
+        public void ObterTest_IdInvalido()
+        {
+            Assert.Throws<FormatException>(() => _negocio.Obter("123"));
+        }
+
+        [Fact()]
         public void InserirTest_NaoEncontrado()
         {
-            _tipoImobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(_tipoImobilizadoId))).Returns((TipoImobilizado)null);
+            _tipoImobilizadoRepo.Setup(s => s.Obter(It.IsAny<ObjectId>())).Returns((TipoImobilizado)null);
 
             Assert.Throws<Excecoes.ObjetoNaoEncontradoException>(() => _negocio.Inserir(InstanciarImobilizado()));
         }
@@ -40,8 +41,8 @@ namespace DesafioStone.Negocio.Tests
         {
             var tipoImobilizado = InstanciarTipoImobilizado();
             var imobilizado = InstanciarImobilizado();
-            _tipoImobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(_tipoImobilizadoId))).Returns(tipoImobilizado);
-            _imobilizadoRepo.Setup(s => s.Inserir(imobilizado)).Returns(imobilizado);
+            _tipoImobilizadoRepo.Setup(s => s.Obter(It.IsAny<ObjectId>())).Returns(tipoImobilizado);
+            _imobilizadoRepo.Setup(s => s.Inserir(It.IsAny<Imobilizado>())).Returns(imobilizado);
 
             var retorno = _negocio.Inserir(imobilizado);
             Assert.Equal(imobilizado, retorno);
@@ -56,7 +57,7 @@ namespace DesafioStone.Negocio.Tests
         [Fact()]
         public void AtualizarTest_NaoEncontrado()
         {
-            _imobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(_imobilizadoId))).Returns((Imobilizado)null);
+            _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<ObjectId>())).Returns((Imobilizado)null);
             Assert.Throws<Excecoes.ObjetoNaoEncontradoException>(() => _negocio.Atualizar(_imobilizadoId, InstanciarImobilizado()));
         }
 
@@ -64,8 +65,8 @@ namespace DesafioStone.Negocio.Tests
         public void AtualizarTest_Ok()
         {
             var imobilizado = InstanciarImobilizado();
-            _imobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(_imobilizadoId))).Returns(imobilizado);
-            _imobilizadoRepo.Setup(s => s.Atualizar(imobilizado)).Returns(imobilizado);
+            _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<ObjectId>())).Returns(imobilizado);
+            _imobilizadoRepo.Setup(s => s.Atualizar(It.IsAny<Imobilizado>())).Returns(imobilizado);
 
             var retorno = _negocio.Atualizar(_imobilizadoId, imobilizado);
 
@@ -81,18 +82,16 @@ namespace DesafioStone.Negocio.Tests
         [Fact()]
         public void ApagarTest_NaoEncontrado()
         {
-            _imobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(_imobilizadoId))).Returns((Imobilizado)null);
+            _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<ObjectId>())).Returns((Imobilizado)null);
             Assert.Throws<Excecoes.ObjetoNaoEncontradoException>(() => _negocio.Apagar(_imobilizadoId));
         }
 
         [Fact()]
         public void ApagarTest_Ok()
         {
-            var objId = ObjectId.Parse(_imobilizadoId);
-
             var imobilizado = InstanciarImobilizado();
-            _imobilizadoRepo.Setup(s => s.Obter(objId)).Returns(imobilizado);
-            _imobilizadoRepo.Setup(s => s.Apagar(objId));
+            _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<ObjectId>())).Returns(imobilizado);
+            _imobilizadoRepo.Setup(s => s.Apagar(It.IsAny<ObjectId>()));
 
             var retorno = _negocio.Apagar(_imobilizadoId);
 

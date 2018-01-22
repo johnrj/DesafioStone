@@ -91,6 +91,8 @@
   <ItemGroup>
     <Compile Include="Negocio\DisponibilidadeNegocioTests.cs" />
     <Compile Include="Negocio\ImobilizadoNegocioTests.cs" />
+    <Compile Include="Negocio\TipoImobilizadoNegocioTests.cs" />
+    <Compile Include="Negocio\UtilizacaoNegocioTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -53,6 +53,10 @@ namespace DesafioStone.Negocio
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
+            if (_repo.ItemEmuso(obj))
+            {
+                throw new Excecoes.AcaoProibidaException();
+            }
 
             var retorno = _repo.Atualizar(obj);
             return retorno;

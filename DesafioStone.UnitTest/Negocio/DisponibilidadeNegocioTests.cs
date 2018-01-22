@@ -32,7 +32,7 @@ namespace DesafioStone.Negocio.Tests
             var utilizacoes = InstanciarListaUtilizacoes(DateTime.Today);
 
             _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<bool>())).Returns(imobilizados);
-            _utilizacaoRepo.Setup(s => s.Obter(DateTime.Today)).Returns(utilizacoes);
+            _utilizacaoRepo.Setup(s => s.Obter(It.IsAny<DateTime>())).Returns(utilizacoes);
 
             var retorno = _negocio.ObterTodasDisponibilidadesDoDia();
 
@@ -46,8 +46,8 @@ namespace DesafioStone.Negocio.Tests
             var imobilizados = InstanciarListaImobilizado();
             var utilizacoes = InstanciarListaUtilizacoes(data);
 
-            _imobilizadoRepo.Setup(s => s.Obter(true)).Returns(imobilizados);
-            _utilizacaoRepo.Setup(s => s.Obter(data)).Returns(utilizacoes);
+            _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<bool>())).Returns(imobilizados);
+            _utilizacaoRepo.Setup(s => s.Obter(It.IsAny<DateTime>())).Returns(utilizacoes);
 
             var retorno = _negocio.ObterTodasDisponibilidadesDoDia(data);
 
@@ -58,19 +58,20 @@ namespace DesafioStone.Negocio.Tests
         public void ObterTodasDisponibilidadesDoDiaEItemEspecifico()
         {
             var data = new DateTime(2018, 1, 1);
-
             var imobilizado = InstanciarListaImobilizado(false).First();
-
             var utilizacoes = InstanciarListaUtilizacoes(data);
 
-            _imobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(_imobilizadoId))).Returns(imobilizado);
-            _utilizacaoRepo.Setup(s => s.Obter(_imobilizadoId, data)).Returns(utilizacoes);
+            _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<ObjectId>())).Returns((Imobilizado)null);
+            _utilizacaoRepo.Setup(s => s.Obter(It.IsAny<string>(), It.IsAny<DateTime>())).Returns(utilizacoes);
 
             Assert.Throws<Excecoes.ObjetoNaoEncontradoException>(() => _negocio.ObterTodasDisponibilidadesDoDia(_imobilizadoIdInvalido, data));
+
+            _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<ObjectId>())).Returns(imobilizado);
+            
             Assert.Throws<Excecoes.AcaoProibidaException>(() => _negocio.ObterTodasDisponibilidadesDoDia(_imobilizadoId, data));
 
             imobilizado.Ativo = true;
-            _imobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(_imobilizadoId))).Returns(imobilizado);
+            _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<ObjectId>())).Returns(imobilizado);
 
             var retorno = _negocio.ObterTodasDisponibilidadesDoDia(_imobilizadoId, data);
             AssercoesGenericas(data, imobilizado, retorno);
@@ -90,6 +91,7 @@ namespace DesafioStone.Negocio.Tests
                 }
             };
         }
+
         private static List<Utilizacao> InstanciarListaUtilizacoes(DateTime data)
         {
             return new List<Utilizacao>()
