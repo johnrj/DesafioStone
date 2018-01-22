@@ -7,35 +7,37 @@ namespace DesafioStone.Negocio
 {
     public class ImobilizadoNegocio : IImobilizadoNegocio
     {
-        IImobilizadoRepository repo;
-        public ImobilizadoNegocio()
+        IImobilizadoRepository _repo;
+        ITipoImobilizadoRepository _tipoImobilizadoRepo;
+
+        public ImobilizadoNegocio(IImobilizadoRepository repo, ITipoImobilizadoRepository tipoImobilizadoRepo)
         {
-            repo = new ImobilizadoRepository();
+            _repo = repo;
+            _tipoImobilizadoRepo = tipoImobilizadoRepo;
         }
 
         public List<Imobilizado> ObterTodos()
         {
-            var retorno = repo.ObterTodos();
+            var retorno = _repo.ObterTodos();
             return retorno;
         }
 
         public Imobilizado Obter(string id)
         {
-            var retorno = repo.Obter(ObjectId.Parse(id));
+            var retorno = _repo.Obter(ObjectId.Parse(id));
             return retorno;
         }
 
         public Imobilizado Inserir(Imobilizado obj)
         {
-            ITipoImobilizadoRepository tipoImobilizadoRepo = new TipoImobilizadoRepository();
-            var tipoImobilizado = tipoImobilizadoRepo.Obter(ObjectId.Parse(obj.TipoImobilizadoId));
+            var tipoImobilizado = _tipoImobilizadoRepo.Obter(ObjectId.Parse(obj.TipoImobilizadoId));
 
             if (tipoImobilizado == null)
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
 
-            var retorno = repo.Inserir(obj);
+            var retorno = _repo.Inserir(obj);
 
             return retorno;
         }
@@ -44,25 +46,25 @@ namespace DesafioStone.Negocio
         {
             obj._id = ObjectId.Parse(id);
 
-            var objExistente = repo.Obter(obj._id);
+            var objExistente = _repo.Obter(obj._id);
             if (objExistente == null)
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
 
-            var retorno = repo.Atualizar(obj);
+            var retorno = _repo.Atualizar(obj);
             return retorno;
         }
 
         public Imobilizado Apagar(string id)
         {
-            var obj = repo.Obter(ObjectId.Parse(id));
+            var obj = _repo.Obter(ObjectId.Parse(id));
             if (obj == null)
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
 
-            repo.Apagar(obj._id);
+            _repo.Apagar(obj._id);
             return obj;
         }
     }

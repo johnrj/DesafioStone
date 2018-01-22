@@ -9,13 +9,13 @@ namespace DesafioStone.Negocio
 {
     public class DisponibilidadeNegocio : IDisponibilidadeNegocio
     {
-        IUtilizacaoRepository utilizacaoRepo;
-        IImobilizadoRepository imobilizadoRepo;
+        IUtilizacaoRepository _utilizacaoRepo;
+        IImobilizadoRepository _imobilizadoRepo;
 
-        public DisponibilidadeNegocio()
+        public DisponibilidadeNegocio(IUtilizacaoRepository utilizacaoRepo, IImobilizadoRepository imobilizadoRepo)
         {
-            utilizacaoRepo = new UtilizacaoRepository();
-            imobilizadoRepo = new ImobilizadoRepository();
+            _utilizacaoRepo = utilizacaoRepo;
+            _imobilizadoRepo = imobilizadoRepo;
         }
 
         public List<Disponibilidade> ObterTodasDisponibilidadesDoDia()
@@ -27,7 +27,7 @@ namespace DesafioStone.Negocio
 
         public List<Disponibilidade> ObterTodasDisponibilidadesDoDia(DateTime data)
         {
-            var imobilizadosAtivos = imobilizadoRepo.Obter(true);
+            var imobilizadosAtivos = _imobilizadoRepo.Obter(true);
 
             var retorno = imobilizadosAtivos.Select(s => new Disponibilidade
             {
@@ -36,7 +36,7 @@ namespace DesafioStone.Negocio
                 HorasIndisponiveis = new List<DateTime>()
             }).ToList();
 
-            var utilizacoes = utilizacaoRepo.Obter(data);
+            var utilizacoes = _utilizacaoRepo.Obter(data);
 
             ProcessarUtilizacaoHoraria(retorno, utilizacoes, data);
 
@@ -45,7 +45,7 @@ namespace DesafioStone.Negocio
 
         public List<Disponibilidade> ObterTodasDisponibilidadesDoDia(string id, DateTime data)
         {
-            var imobilizado = imobilizadoRepo.Obter(ObjectId.Parse(id));
+            var imobilizado = _imobilizadoRepo.Obter(ObjectId.Parse(id));
 
             if(imobilizado == null)
             {
@@ -67,7 +67,7 @@ namespace DesafioStone.Negocio
                 }
             };
 
-            var utilizacoes = utilizacaoRepo.Obter(id, data);
+            var utilizacoes = _utilizacaoRepo.Obter(id, data);
 
             ProcessarUtilizacaoHoraria(retorno, utilizacoes, data);
 

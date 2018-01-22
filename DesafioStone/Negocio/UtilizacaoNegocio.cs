@@ -9,20 +9,20 @@ namespace DesafioStone.Negocio
 {
     public class UtilizacaoNegocio : IUtilizacaoNegocio
     {
-        IUtilizacaoRepository repo;
-        IImobilizadoRepository repoImobilizado;
-        public UtilizacaoNegocio()
+        IUtilizacaoRepository _repo;
+        IImobilizadoRepository _repoImobilizado;
+        public UtilizacaoNegocio(IUtilizacaoRepository repo, IImobilizadoRepository repoImobilizado)
         {
-            repo = new UtilizacaoRepository();
-            repoImobilizado = new ImobilizadoRepository();
+            _repo = repo;
+            _repoImobilizado = repoImobilizado;
         }
 
         public List<Utilizacao> ObterTodos()
         {
-            var retorno = repo.ObterTodos();
+            var retorno = _repo.ObterTodos();
             var idsItensUtilizados = retorno.Select(s => ObjectId.Parse(s.ItemUtilizadoId)).Distinct().ToList();
 
-            var itensUtilizados = repoImobilizado.Obter(idsItensUtilizados).ToDictionary(k => k._id, v => v);
+            var itensUtilizados = _repoImobilizado.Obter(idsItensUtilizados).ToDictionary(k => k._id, v => v);
 
             retorno.ForEach(f => f.ItemUtilizado = itensUtilizados[ObjectId.Parse(f.ItemUtilizadoId)]);
 
@@ -31,42 +31,42 @@ namespace DesafioStone.Negocio
 
         public Utilizacao Inserir(Utilizacao obj)
         {
-            var imobilizado = repoImobilizado.Obter(ObjectId.Parse(obj.ItemUtilizadoId));
+            var imobilizado = _repoImobilizado.Obter(ObjectId.Parse(obj.ItemUtilizadoId));
             if (imobilizado == null)
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
-            if (repo.ItemEmuso(obj))
+            if (_repo.ItemEmuso(obj))
             {
                 throw new Excecoes.AcaoProibidaException();
             }
 
-            var retorno = repo.Inserir(obj);
+            var retorno = _repo.Inserir(obj);
             return obj;
         }
 
         public Utilizacao Atualizar(string id, Utilizacao obj)
         {
             obj._id = ObjectId.Parse(id);
-            var objExistente = repo.Obter(obj._id);
+            var objExistente = _repo.Obter(obj._id);
             if (objExistente == null)
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
 
-            var retorno = repo.Atualizar(obj);
+            var retorno = _repo.Atualizar(obj);
             return retorno;
         }
 
         public Utilizacao Apagar(string id)
         {
-            var obj = repo.Obter(ObjectId.Parse(id));
+            var obj = _repo.Obter(ObjectId.Parse(id));
             if (obj == null)
             {
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
 
-            repo.Apagar(obj._id);
+            _repo.Apagar(obj._id);
             return obj;
         }
     }

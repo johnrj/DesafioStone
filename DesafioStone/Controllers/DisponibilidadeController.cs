@@ -10,11 +10,11 @@ namespace DesafioStone.Controllers
 {
     public class DisponibilidadeController : ApiController
     {
-        IDisponibilidadeNegocio negocio;
+        IDisponibilidadeNegocio _negocio;
 
-        public DisponibilidadeController()
+        public DisponibilidadeController(IDisponibilidadeNegocio negocio)
         {
-            negocio = new DisponibilidadeNegocio();
+            _negocio = negocio;
         }
 
         [ResponseType(typeof(List<Disponibilidade>))]
@@ -22,7 +22,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = negocio.ObterTodasDisponibilidadesDoDia();
+                var retorno = _negocio.ObterTodasDisponibilidadesDoDia();
                 return Ok(retorno);
             }
             catch (Exception ex)
@@ -36,7 +36,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = negocio.ObterTodasDisponibilidadesDoDia(d);
+                var retorno = _negocio.ObterTodasDisponibilidadesDoDia(d);
                 return Ok(retorno);
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = negocio.ObterTodasDisponibilidadesDoDia(id, d);
+                var retorno = _negocio.ObterTodasDisponibilidadesDoDia(id, d);
                 return Ok(retorno);
             }
             catch (Excecoes.AcaoProibidaException)

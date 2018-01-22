@@ -10,10 +10,10 @@ namespace DesafioStone.Controllers
 {
     public class TipoImobilizadoController : ApiController
     {
-        private ITipoImobilizadoNegocio negocio;
-        public TipoImobilizadoController()
+        ITipoImobilizadoNegocio _negocio;
+        public TipoImobilizadoController(ITipoImobilizadoNegocio negocio)
         {
-            negocio = new TipoImobilizadoNegocio();
+            _negocio = negocio;
         }
 
         [ResponseType(typeof(List<TipoImobilizado>))]
@@ -21,7 +21,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = negocio.ObterTodos();
+                var retorno = _negocio.ObterTodos();
                 return Ok(retorno);
             }
             catch(Exception ex)
@@ -35,7 +35,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = negocio.Obter(id);
+                var retorno = _negocio.Obter(id);
                 return Ok(retorno);
             }
             catch(Exception ex)
@@ -54,7 +54,7 @@ namespace DesafioStone.Controllers
             
             try
             {
-                var retorno = negocio.Inserir(obj);
+                var retorno = _negocio.Inserir(obj);
                 return Created("DefaultApi", retorno);
             }
             catch (Excecoes.ObjetoDuplicadoException)
@@ -77,7 +77,7 @@ namespace DesafioStone.Controllers
 
             try
             {
-                var retorno = negocio.Atualizar(id, obj);
+                var retorno = _negocio.Atualizar(id, obj);
                 return Ok(retorno);
             }
             catch (Excecoes.ObjetoNaoEncontradoException)
@@ -95,7 +95,7 @@ namespace DesafioStone.Controllers
         {
             try
             {
-                var retorno = negocio.Apagar(id);
+                var retorno = _negocio.Apagar(id);
                 return Ok(retorno);
             }
             catch (Excecoes.ObjetoNaoEncontradoException)
