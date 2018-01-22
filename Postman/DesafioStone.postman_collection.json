@@ -1,0 +1,607 @@
+{
+	"info": {
+		"name": "DesafioStone",
+		"_postman_id": "60e18f3f-b2c8-85ea-7d64-b7f015314960",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "tipoimobilizado",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:51674/api/tipoimobilizado/5a65d75ba8728710a0793477",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"Modem 4G USB\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/tipoimobilizado/5a65d75ba8728710a0793477",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"tipoimobilizado",
+								"5a65d75ba8728710a0793477"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/tipoimobilizado/",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"Desktop Dell\",\n\t\"TipoImobilizadoId\": \"Computador\",\n\t\"Descricao\":\"Windows 10 Home, 16GB RAM, SSD 518GB\",\n\t\"Ativo\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/tipoimobilizado/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"tipoimobilizado",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/tipoimobilizado/5a63c2bda872872654b15637",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"Desktop Dell\",\n\t\"TipoImobilizadoId\": \"Computador\",\n\t\"Descricao\":\"Windows 10 Home, 16GB RAM, SSD 518GB\",\n\t\"Ativo\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/tipoimobilizado/5a63c2bda872872654b15637",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"tipoimobilizado",
+								"5a63c2bda872872654b15637"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/tipoimobilizado/5a65d75ba8728710a0793477",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"Modem 4G USB\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/tipoimobilizado/5a65d75ba8728710a0793477",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"tipoimobilizado",
+								"5a65d75ba8728710a0793477"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/tipoimobilizado/",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"Modem 4G\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/tipoimobilizado/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"tipoimobilizado",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "imobilizado",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:51674/api/imobilizado",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"Modem 4G USB\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/imobilizado/5a63b3f7a872872ce8b6235f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"imobilizado",
+								"5a63b3f7a872872ce8b6235f"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/imobilizado/5a63b3f7a872872ce8b6235f",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"Modem 4G USB\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/imobilizado/5a63b3f7a872872ce8b6235f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"imobilizado",
+								"5a63b3f7a872872ce8b6235f"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/imobilizado/",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Nome\": \"Desktop Dell\",\n    \"Descricao\": \"Windows 10 Home, 8GB RAM, SSD 256GB\",\n    \"Ativo\": true,\n    \"TipoImobilizadoId\": \"5a63c2c5a872872654b15638\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/imobilizado/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"imobilizado",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/imobilizado/5a65dde4a872873168f5d608",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Nome\": \"Desktop Dell\",\n    \"Descricao\": \"Windows 10 Home, 8GB RAM, HD 1TB\",\n    \"Ativo\": true,\n    \"TipoImobilizadoId\": \"5a63c2c5a872872654b15638\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/imobilizado/5a65dde4a872873168f5d608",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"imobilizado",
+								"5a65dde4a872873168f5d608"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/imobilizado/5a65dde4a872873168f5d608",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Nome\": \"Desktop Dell\",\n    \"Descricao\": \"Windows 10 Home, 8GB RAM, HD 1TB\",\n    \"Ativo\": true,\n    \"TipoImobilizadoId\": \"5a63c2c5a872872654b15638\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/imobilizado/5a65dde4a872873168f5d608",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"imobilizado",
+								"5a65dde4a872873168f5d608"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "utilizacao",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:51674/api/utilizacao/",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"Desktop Dell\",\n\t\"TipoImobilizadoId\": \"Computador\",\n\t\"Descricao\":\"Windows 10 Home, 16GB RAM, SSD 518GB\",\n\t\"Ativo\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/utilizacao/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"utilizacao",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "post utilizacao para dia e horario já reservado",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ItemUtilizadoId\": \"5a63b3f7a872872ce8b6235f\",\n    \"Responsavel\": \"Julio Cezar\",\n    \"Andar\": 13,\n    \"Sala\": \"Teste\",\n    \"InicioUso\": \"2018-02-01T11:00:00\",\n    \"FimUso\": \"2018-02-01T14:00:00\",\n    \"Devolvido\": false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/utilizacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"utilizacao"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/utilizacao",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ItemUtilizadoId\": \"5a63b3f7a872872ce8b6235f\",\n    \"Responsavel\": \"Julio Cezar\",\n    \"Andar\": 13,\n    \"Sala\": \"Teste\",\n    \"InicioUso\": \"2018-02-01T14:00:00\",\n    \"FimUso\": \"2018-02-01T16:00:00\",\n    \"Devolvido\": false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/utilizacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"utilizacao"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/utilizacao/5a65e026a872873168f5d609",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ItemUtilizadoId\": \"5a63b3f7a872872ce8b6235f\",\n    \"Responsavel\": \"Julio Cezar\",\n    \"Andar\": 13,\n    \"Sala\": \"Teste\",\n    \"InicioUso\": \"2018-02-01T14:00:00\",\n    \"FimUso\": \"2018-02-01T16:00:00\",\n    \"Devolvido\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/utilizacao/5a65e026a872873168f5d609",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"utilizacao",
+								"5a65e026a872873168f5d609"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/utilizacao/5a65e026a872873168f5d609",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ItemUtilizadoId\": \"5a63b3f7a872872ce8b6235f\",\n    \"Responsavel\": \"Julio Cezar\",\n    \"Andar\": 13,\n    \"Sala\": \"Teste\",\n    \"InicioUso\": \"2018-02-01T14:00:00\",\n    \"FimUso\": \"2018-02-01T16:00:00\",\n    \"Devolvido\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/utilizacao/5a65e026a872873168f5d609",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"utilizacao",
+								"5a65e026a872873168f5d609"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "disponibilidade",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:51674/api/disponibilidade/",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Nome\": \"Desktop Dell\",\n\t\"TipoImobilizadoId\": \"Computador\",\n\t\"Descricao\":\"Windows 10 Home, 16GB RAM, SSD 518GB\",\n\t\"Ativo\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/disponibilidade/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"disponibilidade",
+								""
+							]
+						},
+						"description": "Se não passar data, pega a disponibilidade de todos os imobilizados ativos para o dia corrente."
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/disponibilidade?d=2018-02-01",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ItemUtilizadoId\": \"5a63b3f7a872872ce8b6235f\",\n    \"Responsavel\": \"Julio Cezar\",\n    \"Andar\": 13,\n    \"Sala\": \"Teste\",\n    \"InicioUso\": \"2018-02-01T14:00:00\",\n    \"FimUso\": \"2018-02-01T16:00:00\",\n    \"Devolvido\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/disponibilidade?d=2018-02-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"disponibilidade"
+							],
+							"query": [
+								{
+									"key": "d",
+									"value": "2018-02-01",
+									"equals": true
+								}
+							]
+						},
+						"description": "Passando uma data, verifica-se a disponibilidade de todos os imobiliados para o dia passado."
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:51674/api/disponibilidade?id=5a63b3f7a872872ce8b6235f&d=2018-02-01",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ItemUtilizadoId\": \"5a63b3f7a872872ce8b6235f\",\n    \"Responsavel\": \"Julio Cezar\",\n    \"Andar\": 13,\n    \"Sala\": \"Teste\",\n    \"InicioUso\": \"2018-02-01T14:00:00\",\n    \"FimUso\": \"2018-02-01T16:00:00\",\n    \"Devolvido\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:51674/api/disponibilidade?id=5a63b3f7a872872ce8b6235f&d=2018-02-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "51674",
+							"path": [
+								"api",
+								"disponibilidade"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5a63b3f7a872872ce8b6235f",
+									"equals": true
+								},
+								{
+									"key": "d",
+									"value": "2018-02-01",
+									"equals": true
+								}
+							]
+						},
+						"description": "Passando o id do imobilizado e uma data, verifica-se a disponibilidade do imobilizado em questão, naquela data."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

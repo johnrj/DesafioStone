@@ -28,7 +28,7 @@ namespace DesafioStone.Negocio
         public Imobilizado Inserir(Imobilizado obj)
         {
             ITipoImobilizadoRepository tipoImobilizadoRepo = new TipoImobilizadoRepository();
-            var tipoImobilizado = tipoImobilizadoRepo.Obter(obj.TipoImobilizadoId);
+            var tipoImobilizado = tipoImobilizadoRepo.Obter(ObjectId.Parse(obj.TipoImobilizadoId));
 
             if (tipoImobilizado == null)
             {

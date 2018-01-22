@@ -46,6 +46,7 @@ namespace DesafioStone.Negocio
                 throw new Excecoes.ObjetoNaoEncontradoException();
             }
 
+            obj._id = objExistente._id;
             var retorno = repo.Atualizar(obj);
             return retorno;
         }
