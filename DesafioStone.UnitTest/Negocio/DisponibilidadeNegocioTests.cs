@@ -1,32 +1,28 @@
-﻿using Xunit;
-using DesafioStone.Negocio;
+﻿using DesafioStone.Models;
+using DesafioStone.Repository;
+using MongoDB.Bson;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using DesafioStone.Repository;
-using DesafioStone.Models;
-using MongoDB.Bson;
-using MongoDB.Driver;
+using Xunit;
 
 namespace DesafioStone.Negocio.Tests
 {
     public class DisponibilidadeNegocioTests
     {
-        IDisponibilidadeNegocio negocio;
-        Mock<IUtilizacaoRepository> utilizacaoRepo;
-        Mock<IImobilizadoRepository> imobilizadoRepo;
-        private const string imobilizadoId = "5a63b3f7a872872ce8b6235f";
-        private const string imobilizadoIdInvalido = "5a63b3f7a872872ce8b6235d";
-        private const string tipoImobilizadoId = "5a63c2bda872872654b15637";
+        IDisponibilidadeNegocio _negocio;
+        Mock<IUtilizacaoRepository> _utilizacaoRepo;
+        Mock<IImobilizadoRepository> _imobilizadoRepo;
+        private const string _imobilizadoId = "5a63b3f7a872872ce8b6235f";
+        private const string _imobilizadoIdInvalido = "5a63b3f7a872872ce8b6235d";
+        private const string _tipoImobilizadoId = "5a63c2bda872872654b15637";
 
         public DisponibilidadeNegocioTests()
         {
-            utilizacaoRepo = new Mock<IUtilizacaoRepository>();
-            imobilizadoRepo = new Mock<IImobilizadoRepository>();
-            negocio = new DisponibilidadeNegocio(utilizacaoRepo.Object, imobilizadoRepo.Object);
+            _utilizacaoRepo = new Mock<IUtilizacaoRepository>();
+            _imobilizadoRepo = new Mock<IImobilizadoRepository>();
+            _negocio = new DisponibilidadeNegocio(_utilizacaoRepo.Object, _imobilizadoRepo.Object);
         }
 
         [Fact()]
@@ -35,10 +31,10 @@ namespace DesafioStone.Negocio.Tests
             var imobilizados = InstanciarListaImobilizado();
             var utilizacoes = InstanciarListaUtilizacoes(DateTime.Today);
 
-            imobilizadoRepo.Setup(s => s.Obter(It.IsAny<bool>())).Returns(imobilizados);
-            utilizacaoRepo.Setup(s => s.Obter(DateTime.Today)).Returns(utilizacoes);
+            _imobilizadoRepo.Setup(s => s.Obter(It.IsAny<bool>())).Returns(imobilizados);
+            _utilizacaoRepo.Setup(s => s.Obter(DateTime.Today)).Returns(utilizacoes);
 
-            var retorno = negocio.ObterTodasDisponibilidadesDoDia();
+            var retorno = _negocio.ObterTodasDisponibilidadesDoDia();
 
             AssercoesGenericas(DateTime.Today, imobilizados.First(), retorno);
         }
@@ -50,10 +46,10 @@ namespace DesafioStone.Negocio.Tests
             var imobilizados = InstanciarListaImobilizado();
             var utilizacoes = InstanciarListaUtilizacoes(data);
 
-            imobilizadoRepo.Setup(s => s.Obter(true)).Returns(imobilizados);
-            utilizacaoRepo.Setup(s => s.Obter(data)).Returns(utilizacoes);
+            _imobilizadoRepo.Setup(s => s.Obter(true)).Returns(imobilizados);
+            _utilizacaoRepo.Setup(s => s.Obter(data)).Returns(utilizacoes);
 
-            var retorno = negocio.ObterTodasDisponibilidadesDoDia(data);
+            var retorno = _negocio.ObterTodasDisponibilidadesDoDia(data);
 
             AssercoesGenericas(data, imobilizados.First(), retorno);
         }
@@ -67,16 +63,16 @@ namespace DesafioStone.Negocio.Tests
 
             var utilizacoes = InstanciarListaUtilizacoes(data);
 
-            imobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(imobilizadoId))).Returns(imobilizado);
-            utilizacaoRepo.Setup(s => s.Obter(imobilizadoId, data)).Returns(utilizacoes);
+            _imobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(_imobilizadoId))).Returns(imobilizado);
+            _utilizacaoRepo.Setup(s => s.Obter(_imobilizadoId, data)).Returns(utilizacoes);
 
-            Assert.Throws<Excecoes.ObjetoNaoEncontradoException>(() => negocio.ObterTodasDisponibilidadesDoDia(imobilizadoIdInvalido, data));
-            Assert.Throws<Excecoes.AcaoProibidaException>(() => negocio.ObterTodasDisponibilidadesDoDia(imobilizadoId, data));
+            Assert.Throws<Excecoes.ObjetoNaoEncontradoException>(() => _negocio.ObterTodasDisponibilidadesDoDia(_imobilizadoIdInvalido, data));
+            Assert.Throws<Excecoes.AcaoProibidaException>(() => _negocio.ObterTodasDisponibilidadesDoDia(_imobilizadoId, data));
 
             imobilizado.Ativo = true;
-            imobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(imobilizadoId))).Returns(imobilizado);
+            _imobilizadoRepo.Setup(s => s.Obter(ObjectId.Parse(_imobilizadoId))).Returns(imobilizado);
 
-            var retorno = negocio.ObterTodasDisponibilidadesDoDia(imobilizadoId, data);
+            var retorno = _negocio.ObterTodasDisponibilidadesDoDia(_imobilizadoId, data);
             AssercoesGenericas(data, imobilizado, retorno);
         }
 
@@ -88,9 +84,9 @@ namespace DesafioStone.Negocio.Tests
                 {
                     Nome = "Teste",
                     Descricao = "Teste teste",
-                    TipoImobilizadoId = tipoImobilizadoId,
+                    TipoImobilizadoId = _tipoImobilizadoId,
                     Ativo = ativo,
-                    _id = new ObjectId(imobilizadoId)
+                    _id = new ObjectId(_imobilizadoId)
                 }
             };
         }
@@ -103,7 +99,7 @@ namespace DesafioStone.Negocio.Tests
                     Andar = 10,
                     Sala = "teste",
                     Responsavel = "teste",
-                    ItemUtilizadoId = imobilizadoId,
+                    ItemUtilizadoId = _imobilizadoId,
                     Devolvido = false,
                     InicioUso = data.AddHours(10),
                     FimUso = data.AddHours(12)

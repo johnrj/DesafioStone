@@ -12,7 +12,5 @@ namespace DesafioStone.Models
         public string Descricao { get; set; }
         public bool Ativo { get; set; }
         public string TipoImobilizadoId { get; set; }
-        [BsonIgnore]
-        public List<Utilizacao> Utilizacao { get; set; }
     }
 }
