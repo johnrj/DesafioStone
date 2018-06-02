@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIMongoDBExample", "WebAPIMongoDBExample\WebAPIMongoDBExample.csproj", "{C63ACACE-D6BD-4E7E-9379-76973806A83C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.UnitTest", "WebAPIMongoDBExample.UnitTest\WebAPI.UnitTest.csproj", "{87B8FD19-7120-46BF-8724-B418F5C382E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIMongoDBExample.UnitTest", "WebAPIMongoDBExample.UnitTest\WebAPIMongoDBExample.UnitTest.csproj", "{87B8FD19-7120-46BF-8724-B418F5C382E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
