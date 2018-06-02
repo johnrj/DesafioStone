@@ -1,11 +1,11 @@
-# DesafioStone
+# WebAPIMongoDBExample
 
-Para configurar o MongoDB no seu ambiente, altere as chaves abaixo que estão no web.config do projeto DesafioStone:
+Para configurar o MongoDB no seu ambiente, altere as chaves abaixo que estão no web.config do projeto WebAPIMongoDBExample:
 ```
-<add key="DesafioStoneBDUsuario" value="root"/>
-<add key="DesafioStoneBDSenha" value="123456"/>
-<add key="DesafioStoneBDHost" value="Morpheus"/>
-<add key="DesafioStoneBDPorta" value="27017"/>
+<add key="BDUsuario" value="root"/>
+<add key="BDSenha" value="123456"/>
+<add key="BDHost" value="Morpheus"/>
+<add key="BDPorta" value="27017"/>
 ```
 ### Features
 1) Cadastro (CRUD) de Tipos de Imobilizado.
